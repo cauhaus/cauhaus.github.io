@@ -19,7 +19,7 @@ function renderChoseMaybe(props) {
 }
 
 const renderChoseYes = props => <Highlight color="green">{props.yes}</Highlight>;
-const renderChoseNo = props => <Highlight color="red">{props.yes}</Highlight>;
+const renderChoseNo = props => <Highlight color="red">{props.no}</Highlight>;
 
 const renderChoice = {
     'maybe' : props => renderChoseMaybe(props),
