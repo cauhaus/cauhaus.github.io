@@ -1,46 +1,30 @@
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
 
-const YesButton = styled.span`
+const HoverButton = styled.span`
     &:hover {
-        color: green;
+        color: ${props => props.color};
     }
 `;
 
-const NoButton = styled.span`
-    &:hover {
-        color: red;
-    }
+const Highlight = styled.span`
+    color: ${props => props.color};
 `;
 
-const ChoseYes = styled.span`
-    color: green;
-`;
+function renderChoseMaybe(props) {
+    const yesButton = <HoverButton color="green" onClick={() => props.setChose('yes')}>{props.yes}</HoverButton>;
+    const noButton = <HoverButton color="red" onClick={() => props.setChose('no')}>{props.no}</HoverButton>;
 
-const ChoseNo = styled.span`
-    color: red;
-`;
-
-// TODO: fix this weird formatting wth the '(yes/no)'
-function renderPickedMaybe(yes, no, setChose) {
-    return (
-        <span>
-            (<YesButton onClick={() => setChose('yes')}>{yes}</YesButton>
-            /<NoButton onClick={() => setChose('no')}>{no}</NoButton>)
-        </span>
-    );
+    return <span>({yesButton}/{noButton})</span>
 }
 
+const renderChoseYes = props => <Highlight color="green">{props.yes}</Highlight>;
+const renderChoseNo = props => <Highlight color="red">{props.yes}</Highlight>;
 
-function YesNo(props) {
-    const {yes, no, chose, setChose} = props;
-    return (
-        <span>
-            {chose === 'maybe' && renderPickedMaybe(yes,no,setChose)}
-            {chose === 'yes' && <ChoseYes>{yes}</ChoseYes>}
-            {chose === 'no' && <ChoseNo>{no}</ChoseNo>}
-        </span>
-    );
-}
+const renderChoice = {
+    'maybe' : props => renderChoseMaybe(props),
+    'yes' : props => renderChoseYes(props),
+    'no' : props => renderChoseNo(props)
+};
 
-export default YesNo;
+export default props => renderChoice[props.chose](props);

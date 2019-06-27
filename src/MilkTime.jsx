@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import YesNo from './YesNo';
 
 const MilkMessage = styled.div`
-    grid-area: ${props => props.gridArea};
     text-align: center;
     vertical-align: middle;
     font-family: Andale Mono, monospace;
@@ -11,9 +10,22 @@ const MilkMessage = styled.div`
     font-weight: bold;
 `;
 
+const yesNoProps = {
+    yes: 'is',
+    no: 'is not',
+}
+
+const templateTime = {
+    'cow': 'Milk Time!',
+    'cup': 'five o\'clock somewhere',
+    'heart': 'tight as hell',
+    'cross': 'time for bed',
+}
+
 function MilkTime(props) {
     const [date, setDate] = useState(new Date());
     const [chose, setChose] = useState('maybe');
+    const { template } = props;
 
     useEffect(() => {
         const timerID = setInterval(() => setDate(new Date()), 100);
@@ -21,16 +33,18 @@ function MilkTime(props) {
         return () => clearInterval(timerID);
     }, []);
 
-    const yesNoProps = {
-        yes: 'is',
-        no: 'is not',
-        chose: chose,
-        setChose: setChose,
-    }
+    yesNoProps.chose = chose;
+    yesNoProps.setChose = setChose;
 
     return (
         <MilkMessage {...props}>
-            <p>{date.toLocaleTimeString()} <YesNo {...yesNoProps}/> Milk Time!</p>
+            <p>
+                {date.toLocaleTimeString()}
+                <span> </span>
+                <YesNo {...yesNoProps}/>
+                <span> </span>
+                {templateTime[template]}
+            </p>
         </MilkMessage>
     );
 }
