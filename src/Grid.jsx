@@ -33,7 +33,7 @@ const gridTemplates = {
           " . . . . . . . . . . . . "
           " . m m m m m m m m m m . "
           " . . . . . . . . . . . . "
-          " . . . . . t t . . . . . "
+          " . . . . t t t t . . . . "
           " . . . . . . . . . . . . "
          `,
 
@@ -48,7 +48,7 @@ const gridTemplates = {
           " . . . . . . . . . . . . "
           " . m m m m m m m m m m . "
           " . . . . . . . . . . . . "
-          " . . . . . t t . . . . . "
+          " . . . . t t t t . . . . "
           " . . . . . . . . . . . . "
          `,
 
@@ -63,7 +63,7 @@ const gridTemplates = {
           " . . . . . . . . . . . . "
           " . m m m m m m m m m m . "
           " . . . . . . . . . . . . "
-          " . . . . . t t . . . . . "
+          " . . . . t t t t . . . . "
           " . . . . . . . . . . . . "
          `,
 
@@ -78,7 +78,7 @@ const gridTemplates = {
           " . . . . . . . . . . . . "
           " . m m m m m m m m m m . "
           " . . . . . . . . . . . . "
-          " . . . . . t t . . . . . "
+          " . . . . t t t t . . . . "
           " . . . . . . . . . . . . "
          `,
 }
@@ -95,7 +95,6 @@ const Layout = styled.div`
 const place = (component, gridArea, props) => <Place gridArea={gridArea} {...props}>{component}</Place>;
 
 function Grid(props) {
-    const [tweet, setTweet] = useState(null);
     const { columns, rows, template, setTemplate } = props;
 
     const layoutProps = {
@@ -110,8 +109,8 @@ function Grid(props) {
             {place(<img src={images.cup} alt="cup" />, 'u', {onClick: () => setTemplate('cup')})}
             {place(<img src={images.heart} alt="heart" />, 'h', {onClick: () => setTemplate('heart')})}
             {place(<img src={images.cross} alt="cross" />, 'p', {onClick: () => setTemplate('cross')})}
-            {place(<MilkTime template={template} setTweet={setTweet} />, 'm')}
-            {place(<Tweet tweet={tweet}/>)}
+            {place(<MilkTime template={template} />, 'm')}
+            {place(<Tweet tweet={"sample tweet"} />, 't')}
         </Layout>
     );
 }

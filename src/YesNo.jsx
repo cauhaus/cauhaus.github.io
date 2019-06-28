@@ -12,8 +12,8 @@ const Highlight = styled.span`
 `;
 
 function renderChoseMaybe(props) {
-    const yesButton = <HoverButton color="green" onClick={() => props.setChose('yes')}>{props.yes}</HoverButton>;
-    const noButton = <HoverButton color="red" onClick={() => props.setChose('no')}>{props.no}</HoverButton>;
+    const yesButton = <HoverButton color="green" onClick={props.chooseYes}>{props.yes}</HoverButton>;
+    const noButton = <HoverButton color="red" onClick={props.chooseNo}>{props.no}</HoverButton>;
 
     return <span>({yesButton}/{noButton})</span>
 }
